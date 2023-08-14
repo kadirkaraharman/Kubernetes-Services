@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-project
+  ports:
+    - port: 8765
+      targetPort: 80
+  # This service makeing the pods is reachable from outside the cluster
+  # type = minikube service nginx --url
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-project
+spec:
+  selector:
+    matchLabels:
+      app: nginx-project
+  template:
+    metadata:
+      labels:
+        app: nginx-project
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+# this nginx image reachable outside the cluster because of the service he attached. Load Balancer.

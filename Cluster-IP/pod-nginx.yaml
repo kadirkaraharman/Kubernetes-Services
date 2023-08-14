@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx-project
+  ports:
+    - port: 8080
+      targetPort: 80
+
+  #This service is a ClusterIP, it means only reachable inside the cluster.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webserver
+  labels:
+    app: nginx-project
+spec:
+  containers:
+  - name: webserver
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+  - name: webwatcher
+    image: afakharany/watcher:latest
+
+  # Nginx server exposes 80 port fro CLusterIP Service.
+  #get service internalip and connect to webwatcher container and try wget clusterip:8080 and cat the index.html file

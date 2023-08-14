@@ -1,0 +1,2 @@
+This Deployment and configmap is a project for explaining the NodePort, NodePort is a service type that u can reach the pod outside the container, with 
+minikube ip and go to webbrowser and type the minikube ip and the nodeport located port whic is  30080 for http or 30443 for https.

@@ -1,0 +1,1 @@
+This Load balancer service type fro expose the pods outside the cluster like NodePort, Load Balancer is more porfessional for production use cases. NodePort Most likely using for development and test purpose.
